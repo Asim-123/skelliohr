@@ -37,7 +37,7 @@ async function dbConnectHR() {
 
     cached.promise = mongoose.connect(MONGODB_HR_URI, opts).then((mongoose) => {
       console.log('✅ MongoDB HR connected successfully!');
-      console.log('📊 Database:', mongoose.connection.db.databaseName);
+      console.log('📊 Database:', mongoose.connection.db?.databaseName || 'Unknown');
       return mongoose;
     });
   }

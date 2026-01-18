@@ -12,6 +12,11 @@ export async function GET(request: NextRequest) {
     // Test connection
     const connection = await dbConnectHR();
     
+    // Check if database connection is available
+    if (!connection.connection.db) {
+      throw new Error('Database connection not established');
+    }
+    
     // Get database stats
     const dbName = connection.connection.db.databaseName;
     const collections = await connection.connection.db.listCollections().toArray();
