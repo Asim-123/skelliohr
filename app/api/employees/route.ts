@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnectHR from '@/lib/mongodb-hr';
 import Employee from '@/models/Employee';
+import Company from '@/models/Company';
 
 export const runtime = 'nodejs';
 
@@ -72,6 +73,29 @@ export async function POST(request: NextRequest) {
         { success: false, error: 'Employee ID already exists' },
         { status: 400 }
       );
+    }
+
+    // Check current employee count and subscription status
+    const employeeCount = await Employee.countDocuments({ companyId, status: 'active' });
+    const company = await Company.findById(companyId);
+    
+    // If trying to add more than 10 employees and subscription is not active, block creation
+    if (employeeCount >= 10) {
+      const subscriptionStatus = company?.subscriptionStatus || 'free';
+      const subscriptionPlan = company?.subscriptionPlan || 'free';
+      
+      if (subscriptionStatus !== 'active' || subscriptionPlan === 'free') {
+        return NextResponse.json(
+          { 
+            success: false, 
+            error: 'Payment required',
+            message: 'You have reached the free plan limit of 10 employees. Please upgrade to add more employees.',
+            requiresPayment: true,
+            employeeCount: employeeCount
+          },
+          { status: 402 } // 402 Payment Required
+        );
+      }
     }
 
     // Create new employee

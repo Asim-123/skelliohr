@@ -231,6 +231,187 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+              SIMPLE PRICING
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Transparent Pricing That Scales With You
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Start free with up to 10 employees. Only $5 per additional employee per month.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* Free Plan */}
+            <div className="bg-white rounded-3xl shadow-lg border-2 border-gray-200 p-8 hover:shadow-2xl transition-all">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Starter</h3>
+                <p className="text-gray-600">Perfect for small teams</p>
+              </div>
+              <div className="text-center mb-8">
+                <div className="text-5xl font-bold text-gray-900 mb-2">$0</div>
+                <div className="text-gray-600">1 employee only</div>
+              </div>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700">Up to 10 employees included</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700">Employee management</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700">Attendance tracking</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700">Leave management</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700">Basic reporting</span>
+                </li>
+              </ul>
+              <Link href="/signup">
+                <button className="w-full py-3 px-6 bg-gray-100 text-gray-900 rounded-xl hover:bg-gray-200 transition-all font-semibold">
+                  Get Started Free
+                </button>
+              </Link>
+            </div>
+
+            {/* Growth Plan */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl shadow-2xl border-2 border-green-500 p-8 relative transform scale-105 hover:scale-110 transition-all">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                  MOST POPULAR
+                </span>
+              </div>
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Growth</h3>
+                <p className="text-gray-600">For growing businesses</p>
+              </div>
+              <div className="text-center mb-8">
+                <div className="text-5xl font-bold text-green-600 mb-2">$5</div>
+                <div className="text-gray-600">per employee per month</div>
+                <div className="text-sm text-gray-500 mt-1">(after first 10 free employees)</div>
+              </div>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-600 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700 font-medium">Everything in Starter</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-600 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700 font-medium">Unlimited employees</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-600 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700 font-medium">Payroll processing</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-600 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700 font-medium">Advanced analytics</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-600 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700 font-medium">Priority support</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-600 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700 font-medium">Custom reports</span>
+                </li>
+              </ul>
+              <Link href="/signup">
+                <button className="w-full py-3 px-6 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all font-semibold shadow-lg">
+                  Start Growing
+                </button>
+              </Link>
+            </div>
+
+            {/* Enterprise Plan */}
+            <div className="bg-white rounded-3xl shadow-lg border-2 border-gray-200 p-8 hover:shadow-2xl transition-all">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                <p className="text-gray-600">For large organizations</p>
+              </div>
+              <div className="text-center mb-8">
+                <div className="text-5xl font-bold text-gray-900 mb-2">Custom</div>
+                <div className="text-gray-600">Tailored to your needs</div>
+              </div>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700">Everything in Growth</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700">Dedicated account manager</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700">Custom integrations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700">SLA guarantee</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <FiCheckCircle className="text-green-500 mt-1 flex-shrink-0" size={20} />
+                  <span className="text-gray-700">On-premise deployment</span>
+                </li>
+              </ul>
+              <Link href="/contact">
+                <button className="w-full py-3 px-6 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all font-semibold">
+                  Contact Sales
+                </button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Pricing Note */}
+          <div className="mt-12 text-center">
+            <div className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6 max-w-3xl mx-auto mb-4">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">💡 Pricing Example</h3>
+              <div className="space-y-2 text-left text-gray-700">
+                <div className="flex justify-between">
+                  <span>• 1-10 employees:</span>
+                  <span className="font-semibold text-green-600">$0/month (FREE)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>• 11 employees:</span>
+                  <span className="font-semibold">$5/month (1 × $5)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>• 15 employees:</span>
+                  <span className="font-semibold">$25/month (5 × $5)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>• 20 employees:</span>
+                  <span className="font-semibold">$50/month (10 × $5)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>• 50 employees:</span>
+                  <span className="font-semibold">$200/month (40 × $5)</span>
+                </div>
+              </div>
+            </div>
+            <p className="text-gray-600 text-lg">
+              💳 Secure payments powered by <span className="font-semibold text-green-600">Payoneer</span>
+            </p>
+            <p className="text-gray-500 mt-2">
+              All plans include 30-day money-back guarantee • Cancel anytime
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Benefits Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-green-50 to-emerald-50 relative overflow-hidden">
         {/* Background Pattern */}
@@ -379,6 +560,11 @@ export default function HomePage() {
             <div>
               <h3 className="font-bold text-lg mb-6 text-white">Quick Links</h3>
               <ul className="space-y-3 text-gray-400">
+                <li>
+                  <Link href="/pricing" className="hover:text-green-400 transition-colors hover:translate-x-1 inline-block">
+                    Pricing
+                  </Link>
+                </li>
                 <li>
                   <Link href="/login" className="hover:text-green-400 transition-colors hover:translate-x-1 inline-block">
                     HR Login
