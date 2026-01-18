@@ -30,34 +30,36 @@ export default function PaymentModal({ isOpen, onClose, companyId, employeeCount
         // Dynamically import Payoneer SDK
         const { CheckoutWeb } = await import('@payoneer/checkout-web');
         
-        // Initialize Payoneer Checkout
+        // Initialize Payoneer Checkout with event handlers
         // Use 'test' for sandbox/testing, 'live' for production
         const checkout = await CheckoutWeb({ 
-          env: process.env.NEXT_PUBLIC_PAYONEER_ENV || 'test',
-          longId: sessionId 
+          env: (process.env.NEXT_PUBLIC_PAYONEER_ENV || 'test') as 'test' | 'live',
+          longId: sessionId,
+          preload: ['cards'], // Preload card payment method
+          onPaymentSuccess: (result: any) => {
+            console.log('✅ Payment successful:', result);
+            handlePaymentSuccess();
+          },
+          onPaymentFailure: (error: any) => {
+            console.error('❌ Payment failed:', error);
+            setError('Payment failed. Please try again.');
+            setLoading(false);
+            setShowPayoneerWidget(false);
+          },
         });
 
         // Mount the payment widget
-        const cardsComponent = checkout.dropIn('cards').mount(payoneerContainerRef.current);
-
-        // Listen to payment events
-        cardsComponent.on('onPaymentSuccess', (result: any) => {
-          console.log('✅ Payment successful:', result);
-          handlePaymentSuccess();
-        });
-
-        cardsComponent.on('onPaymentFailure', (error: any) => {
-          console.error('❌ Payment failed:', error);
-          setError('Payment failed. Please try again.');
-          setLoading(false);
-          setShowPayoneerWidget(false);
-        });
-
-        cardsComponent.on('onPaymentCancel', () => {
-          console.log('Payment cancelled by user');
-          setLoading(false);
-          setShowPayoneerWidget(false);
-        });
+        const dropIn = checkout.dropIn('cards');
+        if (!dropIn) {
+          throw new Error('Failed to initialize Payoneer drop-in');
+        }
+        
+        if (!payoneerContainerRef.current) {
+          throw new Error('Payoneer container not found');
+        }
+        
+        // Mount the drop-in widget
+        dropIn.mount(payoneerContainerRef.current);
 
       } catch (err: any) {
         console.error('Error loading Payoneer widget:', err);
