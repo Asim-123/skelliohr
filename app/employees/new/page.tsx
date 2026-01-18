@@ -5,12 +5,15 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FiSave, FiX, FiUser } from 'react-icons/fi';
 import HRLayout from '@/components/layout/HRLayout';
+import PaymentModal from '@/components/PaymentModal';
 
 export default function NewEmployeePage() {
   const { user, loading: authLoading } = useHRAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [employeeCount, setEmployeeCount] = useState(0);
   const [formData, setFormData] = useState({
     employeeId: '',
     firstName: '',
@@ -98,6 +101,18 @@ export default function NewEmployeePage() {
 
       const data = await response.json();
 
+      // Check if payment is required
+      if (response.status === 402 || data.requiresPayment) {
+        setError(data.message || 'Payment required to add more employees');
+        setLoading(false);
+        // Set employee count to current + 1 (the count after adding this new employee)
+        setEmployeeCount((data.employeeCount || 1) + 1);
+        
+        // Show payment modal
+        setShowPaymentModal(true);
+        return;
+      }
+
       if (data.success) {
         // Create Firebase account with the password set by HR
         const setupResponse = await fetch('/api/employees/setup-account', {
@@ -144,7 +159,14 @@ export default function NewEmployeePage() {
   }
 
   return (
-    <HRLayout>
+    <>
+      <PaymentModal
+        isOpen={showPaymentModal}
+        onClose={() => setShowPaymentModal(false)}
+        companyId={user?.companyId || ''}
+        employeeCount={employeeCount}
+      />
+      <HRLayout>
       <div className="p-6">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
@@ -431,5 +453,6 @@ export default function NewEmployeePage() {
         </div>
       </div>
     </HRLayout>
+    </>
   );
 }

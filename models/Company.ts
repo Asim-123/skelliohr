@@ -9,6 +9,10 @@ export interface ICompany extends Document {
   email: string;
   website?: string;
   logo?: string;
+  subscriptionStatus?: string;
+  subscriptionPlan?: string;
+  lastPaymentDate?: Date;
+  nextBillingDate?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,6 +30,18 @@ const CompanySchema = new Schema({
   email: { type: String, required: true },
   website: String,
   logo: String,
+  subscriptionStatus: { 
+    type: String, 
+    enum: ['free', 'active', 'payment_failed', 'cancelled'], 
+    default: 'free' 
+  },
+  subscriptionPlan: { 
+    type: String, 
+    enum: ['free', 'growth', 'enterprise'], 
+    default: 'free' 
+  },
+  lastPaymentDate: Date,
+  nextBillingDate: Date,
 }, { timestamps: true });
 
 let Company: Model<ICompany>;

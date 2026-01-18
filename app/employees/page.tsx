@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { FiUsers, FiPlus, FiSearch, FiEdit, FiTrash2, FiMail, FiPhone } from 'react-icons/fi';
 import Link from 'next/link';
 import HRLayout from '@/components/layout/HRLayout';
+import PaymentModal from '@/components/PaymentModal';
 
 interface Employee {
   _id: string;
@@ -27,6 +28,8 @@ export default function EmployeesPage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterDepartment, setFilterDepartment] = useState('all');
+  const [subscriptionStatus, setSubscriptionStatus] = useState<any>(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -37,8 +40,21 @@ export default function EmployeesPage() {
   useEffect(() => {
     if (user?.companyId) {
       fetchEmployees();
+      checkSubscription();
     }
   }, [user]);
+
+  const checkSubscription = async () => {
+    try {
+      const response = await fetch(`/api/subscription/check?companyId=${user?.companyId}`);
+      const data = await response.json();
+      if (data.success) {
+        setSubscriptionStatus(data.subscription);
+      }
+    } catch (error) {
+      console.error('Error checking subscription:', error);
+    }
+  };
 
   const fetchEmployees = async () => {
     try {
@@ -101,7 +117,14 @@ export default function EmployeesPage() {
   }
 
   return (
-    <HRLayout>
+    <>
+      <PaymentModal
+        isOpen={showPaymentModal}
+        onClose={() => setShowPaymentModal(false)}
+        companyId={user?.companyId || ''}
+        employeeCount={(subscriptionStatus?.employeeCount || 1) + 1}
+      />
+      <HRLayout>
       <div className="p-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -111,14 +134,63 @@ export default function EmployeesPage() {
                 <h1 className="text-3xl font-bold text-gray-900">Employees</h1>
                 <p className="text-gray-600 mt-1">Manage your workforce</p>
               </div>
-              <Link href="/employees/new">
-                <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all">
-                  <FiPlus size={20} />
-                  Add Employee
-                </button>
-              </Link>
+              {subscriptionStatus?.requiresPayment && subscriptionStatus?.status !== 'active' ? (
+                <div className="flex items-center gap-3">
+                  <div className="text-right">
+                    <p className="text-sm text-red-600 font-semibold">Payment Required</p>
+                    <p className="text-xs text-gray-500">Upgrade to add more employees</p>
+                  </div>
+                  <button 
+                    onClick={() => setShowPaymentModal(true)}
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-lg hover:from-orange-600 hover:to-red-700 transition-all"
+                  >
+                    <FiPlus size={20} />
+                    Upgrade Now
+                  </button>
+                </div>
+              ) : (
+                <Link href="/employees/new">
+                  <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all">
+                    <FiPlus size={20} />
+                    Add Employee
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
+
+          {/* Payment Warning Banner */}
+          {subscriptionStatus?.requiresPayment && subscriptionStatus?.status !== 'active' && (
+            <div className="mb-6 bg-gradient-to-r from-orange-50 to-red-50 border-l-4 border-orange-500 p-6 rounded-lg">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center">
+                    <span className="text-white text-2xl">⚠️</span>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                    Free Plan Limit Reached
+                  </h3>
+                  <p className="text-gray-700 mb-4">
+                    You have reached the free plan limit of <strong>10 employees</strong>. 
+                    Each additional employee costs <strong>$5 per month</strong>. 
+                    {subscriptionStatus?.employeeCount > 10 && (
+                      <span className="block mt-2 text-lg font-semibold text-green-600">
+                        Your cost: ${(subscriptionStatus.employeeCount - 10) * 5}/month for {subscriptionStatus.employeeCount - 10} additional {subscriptionStatus.employeeCount === 11 ? 'employee' : 'employees'}
+                      </span>
+                    )}
+                  </p>
+                  <button 
+                    onClick={() => setShowPaymentModal(true)}
+                    className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-lg hover:from-orange-600 hover:to-red-700 transition-all font-semibold shadow-lg"
+                  >
+                    Pay ${subscriptionStatus?.amount || 5}/month - Add Employees
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -284,5 +356,6 @@ export default function EmployeesPage() {
         </div>
       </div>
     </HRLayout>
+    </>
   );
 }

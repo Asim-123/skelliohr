@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnectHR from '@/lib/mongodb-hr';
 import Employee from '@/models/Employee';
+import { adminAuth } from '@/lib/firebase-admin';
 
 export const runtime = 'nodejs';
 
@@ -78,7 +79,8 @@ export async function DELETE(
   try {
     await dbConnectHR();
 
-    const employee = await Employee.findByIdAndDelete(params.id);
+    // First, get the employee to retrieve their Firebase UID
+    const employee = await Employee.findById(params.id);
 
     if (!employee) {
       return NextResponse.json(
@@ -87,9 +89,24 @@ export async function DELETE(
       );
     }
 
+    // Delete from Firebase Authentication if firebaseUid exists
+    if (employee.firebaseUid) {
+      try {
+        await adminAuth.deleteUser(employee.firebaseUid);
+        console.log(`✅ Deleted Firebase user: ${employee.firebaseUid}`);
+      } catch (firebaseError: any) {
+        console.error('Error deleting Firebase user:', firebaseError);
+        // Continue with database deletion even if Firebase deletion fails
+        // This prevents orphaned database records
+      }
+    }
+
+    // Delete from database
+    await Employee.findByIdAndDelete(params.id);
+
     return NextResponse.json({
       success: true,
-      message: 'Employee deleted successfully',
+      message: 'Employee deleted successfully from database and Firebase',
     });
   } catch (error: any) {
     console.error('Error deleting employee:', error);
