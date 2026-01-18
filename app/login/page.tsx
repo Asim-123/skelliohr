@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useHRAuth } from '@/contexts/HRAuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { FcGoogle } from 'react-icons/fc';
 import { FiMail, FiLock, FiArrowLeft } from 'react-icons/fi';
 import { FirebaseError } from 'firebase/app';
 
@@ -13,7 +12,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { user, signIn, signInWithGoogle } = useHRAuth();
+  const { user, signIn } = useHRAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -57,28 +56,6 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    setError('');
-    setLoading(true);
-    try {
-      await signInWithGoogle();
-      setTimeout(() => {
-        router.push('/dashboard');
-      }, 500);
-    } catch (err: any) {
-      let errorMessage = 'Failed to sign in with Google.';
-      if (err instanceof FirebaseError) {
-        if (err.code === 'auth/popup-closed-by-user') {
-          errorMessage = 'Google sign-in popup closed.';
-        } else {
-          errorMessage = err.message;
-        }
-      }
-      setError(errorMessage);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (user) {
     return (
@@ -166,25 +143,6 @@ export default function LoginPage() {
               <p className="text-sm">{error}</p>
             </div>
           )}
-
-          {/* Google Sign In */}
-          <button
-            onClick={handleGoogleSignIn}
-            disabled={loading}
-            className="w-full flex items-center justify-center gap-3 px-6 py-3 border-2 border-gray-300 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all font-medium text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed mb-6"
-          >
-            <FcGoogle className="w-6 h-6" />
-            Continue with Google
-          </button>
-
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-gray-500 font-medium">Or continue with email</span>
-            </div>
-          </div>
 
           {/* Email Sign In */}
           <form onSubmit={handleEmailSignIn} className="space-y-5">

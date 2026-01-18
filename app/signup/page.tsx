@@ -220,23 +220,23 @@ export default function SignUpPage() {
           {step === 1 ? (
             <>
               {/* Google Sign Up */}
-              <button
-                onClick={handleGoogleSignUp}
-                disabled={loading}
-                className="w-full flex items-center justify-center gap-3 px-6 py-3 border-2 border-gray-300 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all font-medium text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed mb-6"
-              >
-                <FcGoogle className="w-6 h-6" />
-                Continue with Google
-              </button>
+              {/* <button */}
+                {/* onClick={handleGoogleSignUp} */}
+                {/* disabled={loading} */}
+                {/* className="w-full flex items-center justify-center gap-3 px-6 py-3 border-2 border-gray-300 rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all font-medium text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed mb-6" */}
+              
+                {/* <FcGoogle className="w-6 h-6" /> */}
+                {/* Continue with Google */}
+              {/* </button> */}
 
-              <div className="relative my-6">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300"></div>
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-white text-gray-500 font-medium">Or continue with email</span>
-                </div>
-              </div>
+              {/* <div className="relative my-6"> */}
+                {/* <div className="absolute inset-0 flex items-center"> */}
+                  {/* <div className="w-full border-t border-gray-300"></div> */}
+                {/* </div> */}
+                {/* <div className="relative flex justify-center text-sm"> */}
+                  {/* <span className="px-4 bg-white text-gray-500 font-medium">Or continue with email</span> */}
+                {/* </div> */}
+              {/* </div> */}
 
               {/* Step 1: Account Details */}
               <form onSubmit={(e) => { e.preventDefault(); handleNextStep(); }} className="space-y-5">

@@ -117,70 +117,114 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
-        <div className="max-w-7xl mx-auto">
+      <section className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-white to-green-50 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-96 h-96 bg-green-100 rounded-full opacity-20 blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-emerald-100 rounded-full opacity-20 blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Modern HR Management
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-600 mt-2">
-                Made Simple
+            {/* Trust Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-full text-green-700 text-sm font-medium mb-8">
+              <FiCheckCircle size={16} />
+              <span>Trusted by 500+ Companies Worldwide</span>
+            </div>
+
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+              Enterprise HR Management
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 mt-2">
+                Simplified & Powerful
               </span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Streamline your HR operations with our comprehensive platform. Manage employees, 
-              track attendance, process payroll, and more—all in one place.
+            <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
+              Transform your workforce management with an all-in-one platform designed for efficiency. 
+              From onboarding to payroll, manage every aspect of your HR operations seamlessly.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Link href="/signup">
-                <button className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl text-lg font-semibold flex items-center gap-2 justify-center">
-                  Start Free Trial
-                  <FiArrowRight size={20} />
+                <button className="group px-10 py-5 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all shadow-xl hover:shadow-2xl text-lg font-semibold flex items-center gap-3 justify-center transform hover:scale-105">
+                  Get Started Free
+                  <FiArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </Link>
               <Link href="/login">
-                <button className="px-8 py-4 border-2 border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition-all text-lg font-semibold">
-                  HR Admin Sign In
+                <button className="px-10 py-5 bg-white border-2 border-gray-300 text-gray-700 rounded-xl hover:border-green-600 hover:text-green-600 transition-all text-lg font-semibold shadow-md hover:shadow-lg">
+                  HR Admin Login
                 </button>
               </Link>
             </div>
+
+            {/* Stats Section */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+              <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                <div className="text-4xl font-bold text-green-600 mb-2">500+</div>
+                <div className="text-gray-600 font-medium">Active Companies</div>
+              </div>
+              <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                <div className="text-4xl font-bold text-emerald-600 mb-2">50K+</div>
+                <div className="text-gray-600 font-medium">Employees Managed</div>
+              </div>
+              <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                <div className="text-4xl font-bold text-teal-600 mb-2">99.9%</div>
+                <div className="text-gray-600 font-medium">Uptime Guarantee</div>
+              </div>
+            </div>
             
             {/* Employee Login Link */}
-            <div className="mt-8 p-6 bg-white rounded-xl shadow-lg max-w-md mx-auto border-2 border-blue-200">
-              <p className="text-center text-gray-700 mb-3">
-                <strong>Are you an employee?</strong>
-              </p>
-              <Link href="/employee/login">
-                <button className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg font-semibold">
-                  Employee Portal Login
-                </button>
-              </Link>
+            <div className="max-w-2xl mx-auto">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border-2 border-blue-200 shadow-lg">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="text-left">
+                    <p className="text-lg font-semibold text-gray-900 mb-1">
+                      Employee Access Portal
+                    </p>
+                    <p className="text-gray-600">
+                      Access your profile, attendance, payroll, and more
+                    </p>
+                  </div>
+                  <Link href="/employee/login">
+                    <button className="whitespace-nowrap px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl font-semibold flex items-center gap-2">
+                      Employee Login
+                      <FiArrowRight size={18} />
+                    </button>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Everything You Need to Manage Your Team
+          <div className="text-center mb-20">
+            <div className="inline-block px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-4">
+              COMPREHENSIVE FEATURES
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Everything You Need in One Platform
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Powerful features designed to simplify HR management and boost productivity
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Powerful, integrated tools designed to streamline every aspect of HR management 
+              and empower your workforce
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-green-200 group"
+                className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-green-300 group cursor-pointer transform hover:-translate-y-2"
               >
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  <feature.icon className="text-white" size={28} />
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}>
+                  <feature.icon className="text-white" size={32} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition-colors">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -188,123 +232,217 @@ export default function HomePage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-green-50 to-emerald-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-green-50 to-emerald-50 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-green-200 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-200 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Why Choose Skellio HR?
+              <div className="inline-block px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-6">
+                WHY SKELLIO HR
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                Built for Modern Businesses
               </h2>
-              <p className="text-lg text-gray-600 mb-8">
-                Built for modern businesses, our platform combines powerful features with 
-                an intuitive interface to make HR management effortless.
+              <p className="text-xl text-gray-600 mb-10 leading-relaxed">
+                Our platform combines enterprise-grade capabilities with an intuitive interface, 
+                making complex HR operations simple and efficient for teams of all sizes.
               </p>
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
+                  <div key={index} className="flex items-start gap-4 group">
+                    <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
                       <FiCheckCircle className="text-white" size={16} />
                     </div>
-                    <span className="text-gray-700 font-medium">{benefit}</span>
+                    <span className="text-gray-700 font-semibold text-lg group-hover:text-green-600 transition-colors">{benefit}</span>
                   </div>
                 ))}
               </div>
+              <div className="mt-10">
+                <Link href="/signup">
+                  <button className="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl hover:from-green-700 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl text-lg font-semibold">
+                    Start Your Free Trial
+                  </button>
+                </Link>
+              </div>
             </div>
             <div className="relative">
-              <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center">
-                      <FiZap className="text-white" size={24} />
+              <div className="bg-white rounded-3xl shadow-2xl p-10 border border-gray-200 backdrop-blur-sm">
+                <div className="space-y-8">
+                  <div className="flex items-start gap-5 p-5 rounded-2xl bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 hover:shadow-lg transition-shadow">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <FiZap className="text-white" size={28} />
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">Lightning Fast</div>
-                      <div className="text-sm text-gray-500">Optimized performance</div>
+                      <div className="font-bold text-xl text-gray-900 mb-2">Lightning Fast Performance</div>
+                      <div className="text-gray-600">Optimized for speed with real-time data processing and instant updates</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-600 flex items-center justify-center">
-                      <FiShield className="text-white" size={24} />
+                  <div className="flex items-start gap-5 p-5 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 hover:shadow-lg transition-shadow">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <FiShield className="text-white" size={28} />
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">Secure & Reliable</div>
-                      <div className="text-sm text-gray-500">Enterprise-grade security</div>
+                      <div className="font-bold text-xl text-gray-900 mb-2">Enterprise Security</div>
+                      <div className="text-gray-600">Bank-level encryption with SOC 2 compliance and regular security audits</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center">
-                      <FiTrendingUp className="text-white" size={24} />
+                  <div className="flex items-start gap-5 p-5 rounded-2xl bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 hover:shadow-lg transition-shadow">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                      <FiTrendingUp className="text-white" size={28} />
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">Scalable Solution</div>
-                      <div className="text-sm text-gray-500">Grows with your business</div>
+                      <div className="font-bold text-xl text-gray-900 mb-2">Infinitely Scalable</div>
+                      <div className="text-gray-600">Grows seamlessly from 10 to 10,000+ employees without performance impact</div>
                     </div>
                   </div>
                 </div>
               </div>
+              {/* Decorative element */}
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-r from-green-400 to-emerald-500 rounded-3xl opacity-20 blur-2xl -z-10"></div>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-3xl p-12 shadow-2xl">
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Transform Your HR Management?
-            </h2>
-            <p className="text-xl text-green-50 mb-8">
-              Join hundreds of companies already using Skellio HR to streamline their operations
-            </p>
-            <Link href="/signup">
-              <button className="px-8 py-4 bg-white text-green-600 rounded-lg hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl text-lg font-semibold">
-                Get Started for Free
-              </button>
-            </Link>
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="relative bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 rounded-3xl p-12 md:p-16 shadow-2xl overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/2 -translate-y-1/2"></div>
+              <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full -translate-x-1/2 translate-y-1/2"></div>
+            </div>
+
+            <div className="relative z-10 text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-semibold mb-6">
+                <FiZap size={16} />
+                <span>Limited Time Offer</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                Ready to Transform Your HR Operations?
+              </h2>
+              <p className="text-xl md:text-2xl text-green-50 mb-10 max-w-3xl mx-auto leading-relaxed">
+                Join 500+ companies already using Skellio HR to streamline operations, 
+                reduce costs, and empower their workforce
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link href="/signup">
+                  <button className="group px-10 py-5 bg-white text-green-600 rounded-xl hover:bg-gray-50 transition-all shadow-xl hover:shadow-2xl text-lg font-bold flex items-center gap-3 transform hover:scale-105">
+                    Start Free 30-Day Trial
+                    <FiArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </Link>
+                <Link href="/login">
+                  <button className="px-10 py-5 bg-transparent border-2 border-white text-white rounded-xl hover:bg-white/10 transition-all text-lg font-semibold backdrop-blur-sm">
+                    Sign In to Dashboard
+                  </button>
+                </Link>
+              </div>
+              <p className="mt-8 text-green-100 text-sm">
+                ✓ No credit card required  •  ✓ Full feature access  •  ✓ Cancel anytime
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8 border-t border-gray-800">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-2xl px-4 py-2 rounded-lg inline-block mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div className="lg:col-span-2">
+              <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-2xl px-5 py-3 rounded-xl inline-block mb-6 shadow-lg">
                 Skellio HR
               </div>
-              <p className="text-gray-400">
-                Modern HR management for modern businesses
+              <p className="text-gray-400 text-lg mb-6 leading-relaxed">
+                Enterprise-grade HR management platform designed to streamline operations 
+                and empower modern businesses worldwide.
               </p>
+              <div className="flex gap-4">
+                <a href="#" className="w-10 h-10 rounded-lg bg-gray-800 hover:bg-green-600 flex items-center justify-center transition-colors">
+                  <span className="text-xl">𝕏</span>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-lg bg-gray-800 hover:bg-green-600 flex items-center justify-center transition-colors">
+                  <span className="text-xl">in</span>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-lg bg-gray-800 hover:bg-green-600 flex items-center justify-center transition-colors">
+                  <span className="text-xl">f</span>
+                </a>
+              </div>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Product</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-green-400 transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-green-400 transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-green-400 transition-colors">Security</a></li>
+              <h3 className="font-bold text-lg mb-6 text-white">Quick Links</h3>
+              <ul className="space-y-3 text-gray-400">
+                <li>
+                  <Link href="/login" className="hover:text-green-400 transition-colors hover:translate-x-1 inline-block">
+                    HR Login
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/employee/login" className="hover:text-green-400 transition-colors hover:translate-x-1 inline-block">
+                    Employee Login
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/signup" className="hover:text-green-400 transition-colors hover:translate-x-1 inline-block">
+                    Get Started
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="hover:text-green-400 transition-colors hover:translate-x-1 inline-block">
+                    Contact Us
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-green-400 transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-green-400 transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-green-400 transition-colors">Careers</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-green-400 transition-colors">Privacy</a></li>
-                <li><a href="#" className="hover:text-green-400 transition-colors">Terms</a></li>
-                <li><a href="#" className="hover:text-green-400 transition-colors">Compliance</a></li>
+              <h3 className="font-bold text-lg mb-6 text-white">Legal</h3>
+              <ul className="space-y-3 text-gray-400">
+                <li>
+                  <Link href="/privacy" className="hover:text-green-400 transition-colors hover:translate-x-1 inline-block">
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms" className="hover:text-green-400 transition-colors hover:translate-x-1 inline-block">
+                    Terms & Conditions
+                  </Link>
+                </li>
+                <li>
+                  <a href="mailto:support@skellio.com" className="hover:text-green-400 transition-colors hover:translate-x-1 inline-block">
+                    Support
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:legal@skellio.com" className="hover:text-green-400 transition-colors hover:translate-x-1 inline-block">
+                    Legal Inquiries
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2026 Skellio HR. All rights reserved.</p>
+          <div className="border-t border-gray-800 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-gray-400 text-sm">
+                &copy; 2026 Skellio HR. All rights reserved. Built with excellence.
+              </p>
+              <div className="flex items-center gap-6 text-sm text-gray-400">
+                <span className="flex items-center gap-2">
+                  <FiShield size={16} className="text-green-500" />
+                  SOC 2 Certified
+                </span>
+                <span className="flex items-center gap-2">
+                  <FiCheckCircle size={16} className="text-green-500" />
+                  GDPR Compliant
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
