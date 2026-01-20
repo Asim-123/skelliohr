@@ -199,6 +199,18 @@ export default function DashboardPage() {
     <HRLayout>
       <div className="p-6 bg-gray-50 min-h-screen">
         <div className="max-w-7xl mx-auto">
+          {/* Beta Notice */}
+          <div className="mb-6 bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-300 rounded-xl p-4 shadow-lg">
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-2xl">🚧</span>
+              <div className="text-center">
+                <p className="text-amber-900 font-bold text-lg">BETA - Platform in Development</p>
+                <p className="text-amber-700 text-sm">Some features may be incomplete or under active development</p>
+              </div>
+              <span className="text-2xl">🚧</span>
+            </div>
+          </div>
+
           {/* Header */}
           <div className="mb-8 flex items-center justify-between">
             <div>
